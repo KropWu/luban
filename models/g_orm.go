@@ -18,6 +18,7 @@ package models
 
 import (
 	"database/sql/driver"
+	"encoding/json"
 	"fmt"
 	"gorm.io/gorm"
 	"time"
@@ -32,8 +33,8 @@ const (
 
 type GModel struct {
 	ID        uint `gorm:"primarykey;comment:'自增编号'" json:"id" form:"id"`
-	CreatedAt LocalTime
-	UpdatedAt LocalTime
+	CreatedAt *LocalTime
+	UpdatedAt *LocalTime
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
 }
 
@@ -50,6 +51,14 @@ type LocalTime struct {
 	time.Time
 }
 
+func (t LocalTime) UnmarshalTimeFormat() string {
+	return SecLocalTimeFormat
+}
+
+func (t LocalTime) MarshalTimeFormat() string {
+	return SecLocalTimeFormat
+}
+
 func (t *LocalTime) UnmarshalJSON(data []byte) (err error) {
 	// ""空值不进行解析
 	if len(data) == 2 {
@@ -58,8 +67,11 @@ func (t *LocalTime) UnmarshalJSON(data []byte) (err error) {
 	}
 
 	// 指定解析的格式
-	now, err := time.Parse(`"`+SecLocalTimeFormat+`"`, string(data))
-	*t = LocalTime{Time: now}
+	now, err := time.ParseInLocation(t.UnmarshalTimeFormat(), string(data), time.Local)
+	if err != nil {
+		return err
+	}
+	*t = LocalTime{now}
 	return
 }
 
@@ -104,3 +116,33 @@ func (t LocalTime) DateString() string {
 	*/
 	return t.Format(DateLocalTimeFormat)
 }
+
+/*---    []uint 设定               -----------*/
+
+type UintArray []uint
+
+// 入库。实现 driver.Valuer 接口，Value 返回 json value
+func (j UintArray) Value() (driver.Value, error) {
+	if len(j) == 0 {
+		return "", nil
+	}
+	marshal, err := json.Marshal(j)
+	if err != nil {
+		return "", nil
+	}
+	return string(marshal), nil
+}
+
+// 出库。实现 sql.Scanner 接口，Scan 将 value 扫描至 Jsonb
+func (j *UintArray) Scan(value interface{}) error {
+	uintBytes, ok := value.([]byte)
+	if !ok || len(uintBytes) == 0 {
+		return nil
+	}
+	result := UintArray{}
+	err := json.Unmarshal(uintBytes, &result)
+	*j = result
+	return err
+}
+
+/*---   []unit 时间设定结束      ------------*/

@@ -6,11 +6,11 @@
         <a-menu-item key="/">
           <router-link :to="{path: '/'}">
           <IconFont type="pigs-icon-ziyuan"/>
-            <span class="nav-text">仪表盘</span>
+            <span class="nav-text">集群监控</span>
           </router-link>
         </a-menu-item>
 
-        <a-sub-menu key="2">
+        <!-- <a-sub-menu key="2">
           <template #icon>
             <IconFont type="pigs-icon-fuwuqi1"/>
           </template>
@@ -20,17 +20,17 @@
               服务器
             </router-link>
           </a-menu-item>
-        </a-sub-menu>
+        </a-sub-menu> -->
 
         <a-sub-menu key="3">
           <template #icon>
             <IconFont type="pigs-icon-Kubernetes"/>
           </template>
-          <template #title>容器管理</template>
+          <template #title>集群管理</template>
 
           <a-menu-item key="/k8s/cluster">
             <router-link :to="{path: '/k8s/cluster'}">
-              集群管理
+              集群导入
             </router-link>
           </a-menu-item>
           <a-menu-item key="/k8s/node">
@@ -50,12 +50,12 @@
           </a-menu-item>
           <a-menu-item key="/k8s/network">
             <router-link :to="{path: '/k8s/network'}">
-              网络管理
+              服务发现
             </router-link>
           </a-menu-item>
           <a-menu-item key="/k8s/config">
             <router-link :to="{path: '/k8s/config'}">
-              配置管理
+              对象配置
             </router-link>
           </a-menu-item>
           <a-menu-item key="/k8s/event">
@@ -65,7 +65,7 @@
           </a-menu-item>
         </a-sub-menu>
 
-        <a-sub-menu key="4">
+        <!-- <a-sub-menu key="4">
           <template #icon>
             <IconFont type="pigs-icon-yunweipeizhiguanli"/>
           </template>
@@ -81,9 +81,9 @@
               任务模板
             </router-link>
           </a-menu-item>
-        </a-sub-menu>
+        </a-sub-menu> -->
 
-        <a-sub-menu key="5">
+        <!-- <a-sub-menu key="5">
           <template #icon>
             <IconFont type="pigs-icon-gengduoyingyong"/>
           </template>
@@ -104,22 +104,22 @@
               发布申请
             </router-link>
           </a-menu-item>
-        </a-sub-menu>
+        </a-sub-menu> -->
 
         <a-sub-menu key="6">
           <template #icon>
             <IconFont type="pigs-icon-yonghuzhongxin_shezhizhongxin"/>
           </template>
-          <template #title>个人中心</template>
+          <template #title>权限管理</template>
 
-          <a-menu-item key="/user/change/password">
-            <router-link :to="{path: '/user/change/password'}">
-              修改密码
-            </router-link>
-          </a-menu-item>
           <a-menu-item key="/user/manage">
             <router-link :to="{path: '/user/manage'}">
-              用户管理
+              用户
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="/casbin/manage">
+            <router-link :to="{path: '/casbin/manage'}">
+              角色
             </router-link>
           </a-menu-item>
           <a-menu-item key="/system/settings">
@@ -179,13 +179,13 @@
       </a-layout-content>
       <a-layout-footer :style="{ textAlign: 'center' }">
         <a-space :size="14">
-        <a href="#">官网</a>
-          <a href="https://github.com/dnsjia/luban">
+        <a href="https://github.com">官网</a>
+          <a href="https://github.com">
             <GithubOutlined/>
           </a>
         <a href="#">文档</a>
         </a-space><br/>
-        Copyright ©2020 By LuBan Ops.
+        Copyright ©2023 By Kops.
       </a-layout-footer>
 
 

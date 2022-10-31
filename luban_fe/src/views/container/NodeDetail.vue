@@ -57,7 +57,7 @@
             <span>标签</span>
             <span class="margin-right">:</span>
             <span style="font-size: 12px; display: inline-block; white-space: normal; margin-bottom: 5px;" >
-                      <a-tag v-for="(label_k, label_v, index) in state.nodeData.objectMeta.labels" style="background: #999999; color: white" :key="index">{{ label_v }}: {{ label_k }}</a-tag>
+                      <a-tag v-for="(label_k, label_v, index) in state.nodeData.objectMeta.labels" style="background: #E0E0E0; color: white" :key="index">{{ label_v }}: {{ label_k }}</a-tag>
                     </span>
           </td>
         </tr>
@@ -66,7 +66,7 @@
             <span>注释</span>
             <span class="margin-right">:</span>
             <span class="margin-right ng-scope" style="font-size: 12px; display: inline-block; white-space: normal; margin-bottom: 5px;" >
-                  <a-tag v-for="(annotation_k, annotation_v, index) in state.nodeData.objectMeta.annotations" style="background: #999999; color: white" :key="index">{{ annotation_v }}: {{ annotation_k }}</a-tag>
+                  <a-tag v-for="(annotation_k, annotation_v, index) in state.nodeData.objectMeta.annotations" style="background: #E0E0E0; color: white" :key="index">{{ annotation_v }}: {{ annotation_k }}</a-tag>
                 </span>
           </td>
         </tr>

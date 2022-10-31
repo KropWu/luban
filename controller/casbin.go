@@ -80,6 +80,8 @@ func DeleteCasBin(c *gin.Context) {
 func GetCasBin(c *gin.Context) {
 	e := services.Casbin()
 	data := e.GetPolicy()
+	//data := e.GetFilteredPolicy(2, "develop")
+	fmt.Println(data)
 	response.OkWithData(data, c)
 	return
 }

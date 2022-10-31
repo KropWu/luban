@@ -30,15 +30,21 @@ import (
 )
 
 // GetK8sClient 获取k8s Client
-func GetK8sClient(k8sConf string) (*kubernetes.Clientset, error) {
-
-	config, err := clientcmd.RESTConfigFromKubeConfig([]byte(k8sConf))
+func GetK8sClient(Token string) (*kubernetes.Clientset, error) {
+	config := &rest.Config{
+		Host: "https://172.30.1.215:6443",
+		TLSClientConfig: rest.TLSClientConfig{
+			Insecure: true,
+		},
+		BearerToken: Token,
+	}
+	//config, err := clientcmd.RESTConfigFromKubeConfig([]byte(k8sConf))
 	// skips the validity check for the server's certificate. This will make your HTTPS connections insecure.
 	// config.TLSClientConfig.Insecure = true
-	if err != nil {
-		common.LOG.Error("KubeConfig内容错误", zap.Any("err", err))
-		return nil, errors.New("KubeConfig内容错误")
-	}
+	//if err != nil {
+	//	common.LOG.Error("KubeConfig内容错误", zap.Any("err", err))
+	//	return nil, errors.New("KubeConfig内容错误")
+	//}
 
 	clientSet, err := kubernetes.NewForConfig(config)
 	if err != nil {

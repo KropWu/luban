@@ -25,6 +25,9 @@ func InitCasBinRouter(Router *gin.RouterGroup) {
 
 	CasBinRouter := Router.Group("casbin")
 	{
-		CasBinRouter.POST("", controller.AddCasBin)
+		CasBinRouter.POST("addcasbin", controller.AddCasBin)
+		CasBinRouter.POST("deletecasbin", controller.DeleteCasBin)
+		CasBinRouter.POST("getcasbin", controller.GetCasBin)
 	}
+
 }

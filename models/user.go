@@ -39,6 +39,21 @@ type LoginUser struct {
 	Ldap     bool   `json:"ldap"`
 }
 
+type UserId struct {
+	Data interface{} `json:"clusterIds"`
+}
+
+type UpdateUserInfo struct {
+	ID       uint   `gorm:"primarykey;comment:'自增编号'" json:"id" form:"id"`
+	UserName string `gorm:"column:username;comment:'用户名';size:128;uniqueIndex:uk_username" json:"username" binding:"required"`
+	Phone    string `gorm:"column:phone;comment:'手机号码';size:11" json:"phone"`
+	Email    string `gorm:"column:email;comment:'邮箱';size:128" json:"email"`
+	NickName string `gorm:"column:nick_name;comment:'用户昵称';size:128" json:"nick_name"`
+	Status   *bool  `gorm:"type:tinyint(1);default:true;comment:'用户状态(正常/禁用, 默认正常)'"`
+	RoleId   uint   `gorm:"column:role_id;comment:'角色id外键'" json:"role_id"`
+	Role     Role   `gorm:"foreignkey:RoleId" json:"role"`
+}
+
 func (u User) TableName() string {
 	return u.GModel.TableName("users")
 }

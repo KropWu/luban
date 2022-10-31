@@ -34,7 +34,7 @@ func MysqlTables(db *gorm.DB) {
 		models.Role{},
 		models.Dept{},
 		models.K8SCluster{},
-		//models.ClusterVersion{},
+		models.ClusterVersion{},
 		cmdb.CloudPlatform{},
 		cmdb.VirtualMachine{},
 		cmdb.TreeMenu{},

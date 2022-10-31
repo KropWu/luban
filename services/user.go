@@ -40,3 +40,64 @@ func Login(l models.LoginUser) (models.User, error) {
 	err := common.DB.Preload("Role").Where("email = ?", l.Email).First(&user).Error
 	return user, err
 }
+
+func ListUsers(p *models.PaginationQ, u *[]models.User) (err error) {
+	if p.Page < 1 {
+		p.Page = 1
+	}
+	if p.Size < 1 {
+		p.Size = 10
+	}
+
+	offset := p.Size * (p.Page - 1)
+	tx := common.DB
+	if p.Keyword != "" {
+		tx = common.DB.Where("username like ?", "%"+p.Keyword+"%").Limit(p.Size).Offset(offset).Find(&u)
+	} else {
+		tx = common.DB.Limit(p.Size).Offset(offset).Find(&u)
+
+	}
+
+	var total int64
+	tx.Count(&total)
+	//p.Total = tx.RowsAffected
+	p.Total = total
+	if err := tx.Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func CreateUser(user models.User) (err error) {
+	err = common.DB.Create(&user).Error
+	return
+}
+
+func DelUser(ids models.UserId) (err error) {
+	var u models.User
+
+	err1 := common.DB.Delete(&u, ids.Data)
+	if err1.Error != nil {
+		return err1.Error
+	}
+	return nil
+
+}
+
+func UpdateUserInfo(u models.User) (err error) {
+	return common.DB.Updates(&u).Error
+}
+
+func GetUserInfoById(id int) (user models.User, err error) {
+	var u models.User
+	err = common.DB.Preload("Role").First(&u, "id=?", id).Error
+	if err != nil {
+		return u, err
+	}
+	return u, err
+}
+
+func UpdateUserRole(id int, roleId int) (err error) {
+
+}

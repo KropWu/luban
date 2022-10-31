@@ -132,13 +132,13 @@ export default defineComponent({
 .login_bg {
   width: 100%;
   height: 100%;
-  background: url("../../assets/login_bg.jpg") no-repeat;
+  background: url("../../assets/bg4.jpg") no-repeat;
   /*background-size: 100% 100%;*/
 }
 .login {
     position: absolute;
     top: 12%;
-    left: 22%;
+    left: 55%;
     -webkit-transform: translateX(-20%);
     transform: translateX(-70%);
     width: 370px;

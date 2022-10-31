@@ -25,9 +25,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
-	"net/http"
 )
 
+// 用户注册
 func Register(c *gin.Context) {
 	var user models.User
 	err := CheckParams(c, &user)
@@ -46,6 +46,7 @@ func Register(c *gin.Context) {
 	}
 }
 
+// 用户登录
 func Login(c *gin.Context) {
 	var user models.LoginUser
 	err := CheckParams(c, &user)
@@ -126,7 +127,63 @@ func Login(c *gin.Context) {
 
 }
 
-func UserInfo(c *gin.Context) {
-	user, _ := c.Get("user")
-	c.JSON(http.StatusOK, gin.H{"errcode": 0, "data": gin.H{"user": user}})
+// 获取所有用户列表
+func UserList(c *gin.Context) {
+	query := models.PaginationQ{}
+	if c.ShouldBindQuery(&query) != nil {
+		response.FailWithMessage(response.ParamError, response.ParamErrorMsg, c)
+		return
+	}
+	var userList []models.User
+	if err := services.ListUsers(&query, &userList); err != nil {
+		common.LOG.Error("获取用户列表失败", zap.Any("err", err))
+		response.FailWithMessage(response.InternalServerError, "获取用户列表失败", c)
+	} else {
+		response.OkWithDetailed(response.PageResult{
+			Data:  userList,
+			Total: query.Total,
+			Size:  query.Size,
+			Page:  query.Page,
+		}, "获取用户列表成功", c)
+	}
+}
+
+// 更新用户信息
+func UpdateUserInfo(c *gin.Context) {
+	var user models.UpdateUserInfo
+	err := c.ShouldBindJSON(&user)
+	if err != nil {
+		response.FailWithMessage(response.ParamError, response.ParamErrorMsg, c)
+		return
+	}
+
+	err = services.UpdateUserInfo(models.User{
+		GModel: models.GModel{
+			ID: user.ID,
+		},
+		UserName: user.UserName,
+		Phone:    user.Phone,
+		Email:    user.Email,
+		NickName: user.NickName,
+		Status:   user.Status,
+	})
+	if err != nil {
+		common.LOG.Error("更新失败", zap.Any("err", err))
+		response.FailWithMessage(response.InternalServerError, "更新失败", c)
+		return
+	}
+	response.OkWithMessage("更新成功", c)
+}
+
+// 根据ID获取用户信息
+func GetUserInfoById(c *gin.Context) {
+	id := c.GetInt("userId")
+	data, err := services.GetUserInfoById(id)
+	if err != nil {
+		common.LOG.Error("搜索用户失败", zap.Any("err", err))
+		response.FailWithMessage(response.InternalServerError, "搜索用户失败", c)
+	} else {
+		response.OkWithData(data, c)
+	}
+	return
 }

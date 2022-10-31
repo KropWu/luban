@@ -14,7 +14,7 @@
 
       <a-input-search
           v-model:value="data.searchValue"
-          placeholder="请输入搜索内容"
+          placeholder="请输入名称搜索"
           style="width: 200px"
           @search="configMapSearch"
       />

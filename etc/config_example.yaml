@@ -16,7 +16,7 @@ mysql:
   config: 'charset=utf8mb4&parseTime=True&loc=Local'
   db-name: 'luban'
   username: 'root'
-  password: '123456'
+  password: 'whj2023!!!'
   max-idle-conns: 10
   max-open-conns: 100
   conn-max-idle-time: 60

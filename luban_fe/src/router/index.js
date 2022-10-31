@@ -14,7 +14,7 @@ const routes = [
                 name: 'Index',
                 component: () => import('../views/Index.vue'),
                 meta: {
-                    title: '仪表盘',
+                    title: '集群监控',
                 }
             },
             {
@@ -32,8 +32,8 @@ const routes = [
                 name: 'ClusterManage',
                 component: () => import('../views/container/K8SClusterManage.vue'),
                 meta: {
-                    title: '集群管理',
-                    module: "容器管理"
+                    title: '集群导入',
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -43,7 +43,7 @@ const routes = [
                 component: () => import('../views/container/ClusterDetail.vue'),
                 meta: {
                     title: '集群详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -53,7 +53,7 @@ const routes = [
                 component: () => import('../views/container/Nodes.vue'),
                 meta: {
                     title: '节点管理',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -63,7 +63,7 @@ const routes = [
                 component: () => import('../views/container/NodeDetail.vue'),
                 meta: {
                     title: '节点详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -73,7 +73,7 @@ const routes = [
                 component: () => import('../views/container/WorkLoad.vue'),
                 meta: {
                     title: '工作负载',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -83,7 +83,7 @@ const routes = [
                 component: () => import('../views/container/DeploymentDetail.vue'),
                 meta: {
                     title: '无状态应用详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -93,7 +93,7 @@ const routes = [
                 component: () => import('../views/container/StatefulSetDetail.vue'),
                 meta: {
                     title: '有状态应用详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -103,7 +103,7 @@ const routes = [
                 component: () => import('../views/container/DaemonSetDetail.vue'),
                 meta: {
                     title: '守护进程集详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -113,7 +113,7 @@ const routes = [
                 component: () => import('../views/container/JobDetail.vue'),
                 meta: {
                     title: '任务详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -123,7 +123,7 @@ const routes = [
                 component: () => import('../views/container/CronJobDetail.vue'),
                 meta: {
                     title: '定时任务详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -133,7 +133,7 @@ const routes = [
                 component: () => import('../views/container/PodDetail.vue'),
                 meta: {
                     title: '容器详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -143,7 +143,7 @@ const routes = [
                 component: () => import('../views/container/Storage.vue'),
                 meta: {
                     title: '存储管理',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -153,7 +153,7 @@ const routes = [
                 component: () => import('../views/container/PersistentVolumeClaimDetail.vue'),
                 meta: {
                     title: '存储声明详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -163,7 +163,7 @@ const routes = [
                 component: () => import('../views/container/PersistentVolumeDetail.vue'),
                 meta: {
                     title: '存储卷详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -173,7 +173,7 @@ const routes = [
                 component: () => import('../views/container/StorageClassDetail.vue'),
                 meta: {
                     title: '存储类详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -182,8 +182,8 @@ const routes = [
                 name: 'NetWork',
                 component: () => import('../views/container/NetWork.vue'),
                 meta: {
-                    title: '网络管理',
-                    module: "容器管理"
+                    title: '服务发现',
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -193,7 +193,7 @@ const routes = [
                 component: () => import('../views/container/ServiceDetail.vue'),
                 meta: {
                     title: '服务详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -203,7 +203,7 @@ const routes = [
                 component: () => import('../views/container/IngressDetail.vue'),
                 meta: {
                     title: '路由详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -213,7 +213,7 @@ const routes = [
                 component: () => import('../views/container/ConfigManage.vue'),
                 meta: {
                     title: '配置管理',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -223,7 +223,7 @@ const routes = [
                 component: () => import('../views/container/ConfigMapDetail.vue'),
                 meta: {
                     title: '配置项详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -233,7 +233,7 @@ const routes = [
                 component: () => import('../views/container/SecretDetail.vue'),
                 meta: {
                     title: '保密字典详情',
-                    module: "容器管理"
+                    module: "集群管理"
                 },
                 children: []
             },
@@ -243,7 +243,27 @@ const routes = [
                 component: () => import('../views/container/PodLogs.vue'),
                 meta: {
                     title: '容器日志',
-                    module: "容器管理"
+                    module: "集群管理"
+                },
+                children: []
+            },
+            {
+                path: 'user/manage',
+                name: 'usermanager',
+                component: () => import('../views/user/Manage.vue'),
+                meta: {
+                    title: '用户管理',
+                    module: "权限管理"
+                },
+                children: []
+            },
+            {
+                path: 'casbin/manage',
+                name: 'casbinmanager',
+                component: () => import('../views/casbin/Manage.vue'),
+                meta: {
+                    title: '角色管理',
+                    module: "权限管理"
                 },
                 children: []
             },
