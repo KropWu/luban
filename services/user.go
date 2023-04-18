@@ -37,7 +37,7 @@ func UserRegister(u models.User) (userInter models.User, err error) {
 
 func Login(l models.LoginUser) (models.User, error) {
 	var user models.User
-	err := common.DB.Preload("Role").Where("email = ?", l.Email).First(&user).Error
+	err := common.DB.Preload("Role").Where("username = ?", l.Email).First(&user).Error
 	return user, err
 }
 
@@ -52,9 +52,9 @@ func ListUsers(p *models.PaginationQ, u *[]models.User) (err error) {
 	offset := p.Size * (p.Page - 1)
 	tx := common.DB
 	if p.Keyword != "" {
-		tx = common.DB.Where("username like ?", "%"+p.Keyword+"%").Limit(p.Size).Offset(offset).Find(&u)
+		tx = common.DB.Preload("Role").Where("username like ?", "%"+p.Keyword+"%").Limit(p.Size).Offset(offset).Find(&u)
 	} else {
-		tx = common.DB.Limit(p.Size).Offset(offset).Find(&u)
+		tx = common.DB.Preload("Role").Limit(p.Size).Offset(offset).Find(&u)
 
 	}
 
@@ -91,13 +91,9 @@ func UpdateUserInfo(u models.User) (err error) {
 
 func GetUserInfoById(id int) (user models.User, err error) {
 	var u models.User
-	err = common.DB.Preload("Role").First(&u, "id=?", id).Error
+	err = common.DB.Preload("Role").Where("id = ?", id).Find(&u).Error
 	if err != nil {
 		return u, err
 	}
 	return u, err
-}
-
-func UpdateUserRole(id int, roleId int) (err error) {
-
 }
