@@ -166,6 +166,7 @@ func UpdateUserInfo(c *gin.Context) {
 		Email:    user.Email,
 		NickName: user.NickName,
 		Status:   user.Status,
+		RoleId:   user.RoleId,
 	})
 	if err != nil {
 		common.LOG.Error("更新失败", zap.Any("err", err))
@@ -175,9 +176,27 @@ func UpdateUserInfo(c *gin.Context) {
 	response.OkWithMessage("更新成功", c)
 }
 
+// 根据ID删除用户
+func DelUser(c *gin.Context) {
+	var userIds models.UserId
+	err := c.ShouldBindJSON(&userIds)
+	if err != nil {
+		response.FailWithMessage(response.ParamError, response.ParamErrorMsg, c)
+		return
+	}
+	err = services.DelUser(userIds)
+	if err != nil {
+		common.LOG.Error("删除失败", zap.Any("err", err))
+		response.FailWithMessage(response.InternalServerError, "删除失败", c)
+		return
+	}
+	response.OkWithMessage("删除成功", c)
+}
+
 // 根据ID获取用户信息
 func GetUserInfoById(c *gin.Context) {
 	id := c.GetInt("userId")
+	fmt.Println(id)
 	data, err := services.GetUserInfoById(id)
 	if err != nil {
 		common.LOG.Error("搜索用户失败", zap.Any("err", err))
