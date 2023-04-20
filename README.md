@@ -21,7 +21,7 @@
   </a>
 </p>
 
-> LuBan 鲁班运维平台3.0， 本项目使用Go1.15.x、 Gin、Gorm开发， 前端使用的是Vue3+Ant Design2.2.x框架。
+> 本项目使用Go1.15.x、 Gin、Gorm开发， 前端使用的是Vue3+Ant Design2.2.x框架。
 
 
 #### 项目源码
